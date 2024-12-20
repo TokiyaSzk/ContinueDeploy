@@ -18,7 +18,7 @@ app.post('/webhook', (req, res) => {
   if (ref === 'refs/heads/dev') {
     console.log('Received push to dev branch!');
     // 执行拉取和部署命令
-    exec('git pull origin dev && npm install && npm run build && pm2 delete dev-app && PORT=500 pm2 start npm --name "dev-app" -- run start ',{cwd : '/home/dev/MaiWeb-CN'}, (err, stdout, stderr) => {
+    exec('git pull origin dev && npm install && npm run build && pm2 delete dev-app && PORT=5000 pm2 start npm --name "dev-app" -- run start ',{cwd : '/home/dev/MaiWeb-CN'}, (err, stdout, stderr) => {
       if (err) {
         console.error(`Error: ${stderr}`);
         res.status(500).send('Deployment failed');
