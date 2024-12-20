@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.post('/webhook', (req, res) => {
   const { ref } = req.body;
 
-  const repoName = repository || 'Unknown Repository';  // 默认值为 'Unknown Repository' 如果没有提供
+  const repoName = repository ? repository.name : 'Unknown Repository';
   console.log(`Received push from repository: ${repoName}`);
 
   // 只处理 dev 分支的推送
