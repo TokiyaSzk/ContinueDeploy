@@ -11,11 +11,14 @@ app.use(bodyParser.json());
 app.post('/webhook', (req, res) => {
   const { ref } = req.body;
 
+  const repoName = repository || 'Unknown Repository';  // 默认值为 'Unknown Repository' 如果没有提供
+  console.log(`Received push from repository: ${repoName}`);
+
   // 只处理 dev 分支的推送
   if (ref === 'refs/heads/dev') {
     console.log('Received push to dev branch!');
     // 执行拉取和部署命令
-    exec('git pull origin dev && npm install && npm run build',{cwd : '/home/dev/MaiWeb-CN'}, (err, stdout, stderr) => {
+    exec('git pull origin dev && npm install && npm run build && pm2 delete dev-app && PORT=500 pm2 start npm --name "dev-app" -- run start ',{cwd : '/home/dev/MaiWeb-CN'}, (err, stdout, stderr) => {
       if (err) {
         console.error(`Error: ${stderr}`);
         res.status(500).send('Deployment failed');
