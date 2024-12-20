@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 // Webhook 监听端点
 app.post('/webhook', (req, res) => {
-  const { ref } = req.body;
+  const { ref,repository } = req.body;
 
   const repoName = repository ? repository.name : 'Unknown Repository';
   console.log(`Received push from repository: ${repoName}`);
