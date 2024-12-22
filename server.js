@@ -41,7 +41,7 @@ app.post('/webhook/back', (req, res) => {
   console.log(`Received push from repository: ${repoName}`);
 
   // 只处理 dev 分支的推送
-  if (ref === 'refs/heads/master') {
+  if (ref === 'refs/heads/dev') {
     console.log('Received push to master branch!');
     // 执行拉取和部署命令
     exec(scriptPath, (err, stdout, stderr) => {
@@ -55,7 +55,7 @@ app.post('/webhook/back', (req, res) => {
     });
   } else {
   console.log(ref)
-        res.status(200).send("Not a master branch push ");
+        res.status(200).send("Not a dev branch push ");
   }
 })
 
