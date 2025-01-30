@@ -40,9 +40,9 @@ app.post('/webhook/back', (req, res) => {
   const repoName = repository ? repository.name : 'Unknown Repository';
   console.log(`Received push from repository: ${repoName}`);
 
-  // 只处理 dev 分支的推送
-  if (ref === 'refs/heads/dev') {
-    console.log('Received push to master branch!');
+  // 只处理 main 分支的推送
+  if (ref === 'refs/heads/main') {
+    console.log('Received push to main branch!');
     // 执行拉取和部署命令
     exec(scriptPath, (err, stdout, stderr) => {
       if (err) {
@@ -54,8 +54,8 @@ app.post('/webhook/back', (req, res) => {
       res.status(200).send('Deployment successful');
     });
   } else {
-  console.log(ref)
-        res.status(200).send("Not a dev branch push ");
+    console.log(ref);
+    res.status(200).send("Not a main branch push");
   }
 })
 
