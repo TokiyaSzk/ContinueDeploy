@@ -4,6 +4,7 @@ const { exec } = require('child_process');
 const path = require('path');
 const mailRouter = require('./routes/mail.js'); // 引入邮件发送路由
 require('dotenv').config(); // 加载环境变量
+const cors = require('cors');
 
 const app = express();
 const port = 88;
