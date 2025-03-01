@@ -10,6 +10,10 @@ const port = 88;
 
 app.use(bodyParser.json());
 
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
+
 // Webhook 监听端点
 app.post('/webhook/front', (req, res) => {
   const { ref,repository } = req.body;
